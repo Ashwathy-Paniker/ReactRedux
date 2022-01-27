@@ -1,0 +1,66 @@
+--> Redux :- It is used for state management.It is a container or store where we put our state and we can access these states anywhere in our application. And also we can update the states in the store.
+  -> It managing applications state with a single globel object called store.
+  -> In an application there is only 1 store.
+    -> Single Source of Truth 
+    -> State is read-only (we can change with the help of actions)
+    -> Changes are made with the help of pure function (reducer)
+      -> Reducer :- It is a pure function which takes state and actions as arguments and return a newly updated state.
+    -> It is a third party module 1st we install it 
+      eg:
+        npm install redux react-redux --save 
+    --> How we create a store 
+    import {createStore} from 'redux';
+    const store=createStore();
+    *** store need a reducer 
+    const initialData={count:0};
+    function reducer(state=initialData,actions){
+        return state;
+    }
+    const store=createStore(reducer);
+
+    --> action :- It is a plain object that describes the intention to cause change with type property
+     eg:
+        {
+            type:'INCREMENT',
+            payload:2
+        }
+        and this action called with the help of dispatcher.
+        -> when we dispatch some action then it goes to the reducer , then reducer the the actions and update the state.
+        dispath() : inbuid method of store which is used to dispatch the actions. 
+          eg:
+           store.dispatch({
+            type:'INCREMENT',
+            payload:2
+             })
+             function reducer(state=initialData,actions){
+                    switch(actions.type){
+                        case 'INCREMENT' : return {count:count+actions.payload};
+                        default : return state;
+                    }
+               }
+        -> Assignment 
+          increment 3
+          decrement 2
+          reset 0
+        -> How we get store data in the components 
+        import {Provider} from 'react-redux';
+        <Provider store={store}>
+           <App/>
+        </Provider>
+        -> to receive data in components we have connect method in 'react-redux'
+          -> mapStateToProps :- to get data 
+          -> mapDispatchTOProps :- to dispatch actions 
+    
+    -> Assignment 
+
+       Home  Products  Cart()
+
+        display 10 products 
+           Pname 
+           Image 
+           Price 
+           Quantity 
+              Add Cart  (localstorage & redux store)
+
+              connect(mapStateToProps)
+              connect(null,mapDispatchTOProps)
